@@ -67,22 +67,23 @@ $(function(){
   })
 });
 
-//　Q1-9 クリックして配列のアラート表示
+//　Q1-9 クリックして配列のアラート表示　【※修正※】変数名をindexのiを使用
 
 $(function(){
   $("#q9 li").on("click",function(){  //クリックしたタイミングで
-    const showAlert = $(this).index();alert(showAlert)
+    const i = $(this).index();
+    alert(i)
     //クリックされた要素のインデックス番号を取得し、アラートを表示
   })
 });
 
-//　Q1-10 Q10をクリックしてQ11を操作
+//　Q1-10 Q10をクリックしてQ11を操作　【※修正※】変数名をindexのiを使用
 
 $(function(){
   $("#q10 li").on("click",function(){  //クリックしたタイミングで
-    const onClick = $(this).index();  //クリックされた要素のインデックス番号を取得する
-    console.log($("#q11 li").eq(onClick));  //ブラウザのコンソールに変数の中身を出力
-    $("#q11 li").eq(onClick).addClass("large-text")  //q11でクラス"large-text"を追加
+    const i = $(this).index();  //クリックされた要素のインデックス番号を取得する
+    console.log($("#q11 li").eq(i));  //ブラウザのコンソールに変数の中身を出力
+    $("#q11 li").eq(i).addClass("large-text")  //q11でクラス"large-text"を追加
   })
 });
 

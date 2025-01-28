@@ -1,10 +1,18 @@
 $(function () {  //HTMLを読み込む
-  $(".select-box").on("click", function () {  //セレクトボックスをクリックしたタイミングで
-    const onClick = $(this).val(), category = $(".food-list li"); //クリック時の処理方法を設定
-    "all" === onClick ? category.show() : $.each(category, function (index,value) {
-      //条件式の結果がallだった場合、カテゴリすべてを表示、そうでなければ以下の繰り返し処理。第1引数に処理を行いたいものを指定・第2引数に繰り返し処理を行うための関数を指定
-      const select = $(value).data("category-type");  //条件式を設定
-      onClick === select ? $(value).show() : $(value).hide()  //カテゴリにクリックしたときの処理が当てはまれば表示、当てはまらなければ非表示
-    })
-  })
+  $(".select-box").on("change", function () {  // 選択した値を取得
+    const i = $(this).val();
+    $.each($(".food-list li"), function (index, element) {
+      // allを選択した時の処理方法を設定
+      if (i === "all") {
+        $(element).show(); //すべて表示する
+        return true;
+      }
+      const d = $(element).data("category-type"); //all以外を選択した時の処理方法を設定
+      if (d === i) {
+        $(element).show();  // 一致した場合は表示する
+      } else {
+        $(element).hide();  // 一致しなかった場合は非表示に
+      }
+    });
+  });
 });
