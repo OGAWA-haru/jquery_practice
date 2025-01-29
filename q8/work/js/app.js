@@ -12,11 +12,15 @@
 
 //入力した内容をsearchWordに代入
 $(function () { //HTMLを読みこむ
-  var pageCount = 1, f = "";
+  let pageCount = 1, f = "";
   $(".search-btn").on("click", function () { //検索ボタンをクリックしたタイミングで
     const searchWord = $("#search-input").val(); //クリック時の処理方法を設定
     //pageCountの初期値は1、同じ検索ワードで検索を行う場合は、pageCountに+1する。違う検索ワードの場合は1に戻す
-    searchWord !== f ? (pageCount = 1,$(".lists").empty(),f = searchWord) : pageCount++ ;
+    if(f === !(searchWord)){
+      pageCount++
+    } else {
+      pageCount = 1, $(".lists").empty();
+    }
 
     $.ajax({ //ajaxを書く ↓settings
       url: "https://ci.nii.ac.jp/books/opensearch/search?title=" //取得したいURLを入力
@@ -53,10 +57,11 @@ $(function () { //HTMLを読みこむ
   }
   });
 //リセットボタンの機能実装
-  $(".reset-btn").on("click", function () { //reset-btnクラスをクリックしたタイミングで
-    searchWord = 1; f = ""; //ページ数を１に 検索結果と条件をリセット
-    $(".lists").empty(); //listクラスに入っている文字を空にする
-    $(".message").remove(); //messageクラスを削除する
-    $("#search-input").val("") //input要素にテキスト「検索ワード」をセット
+  $(function(){
+    $(".reset-btn").on("click", function () { //reset-btnクラスをクリックしたタイミングで
+      $(".lists").empty(); //listクラスに入っている文字を空にする
+      $(".message").remove(); //messageクラスを削除する
+      $("#search-input").val("") //input要素にテキスト「検索ワード」をセット
+    })
+  });
   })
-});
