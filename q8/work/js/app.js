@@ -16,7 +16,7 @@ $(function () { //HTMLを読みこむ
   $(".search-btn").on("click", function () { //検索ボタンをクリックしたタイミングで
     const searchWord = $("#search-input").val(); //クリック時の処理方法を設定
     //pageCountの初期値は1、同じ検索ワードで検索を行う場合は、pageCountに+1する。違う検索ワードの場合は1に戻す
-    if(f === !(searchWord)){
+    if(f === searchWord){
       pageCount++
     } else {
       pageCount = 1, $(".lists").empty();
@@ -40,6 +40,7 @@ $(function () { //HTMLを読みこむ
     })
   function a(searchWord) { // 検索をしたときに実行される関数
     $(".message").remove(); //messageクラスを削除する
+    let response;
     //1.入力した内容で検索結果が出るときに繰り返し実行する処理内容
     0 < (null == (response = searchWord[0].items) ? void 0 : response.length) ? $.each(searchWord[0].items,
       function (h, c) { //以下関数を実行
