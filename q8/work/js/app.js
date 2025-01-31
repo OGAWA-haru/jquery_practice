@@ -46,15 +46,16 @@ $(function () { //HTMLを読みこむ
       function (h, c) { //以下関数を実行
       //↓ lists-itemクラスを追加し
       // テキストを追加＋代入された変数の中にタイトルが存在する場合はそのタイトルを、存在しない場合は「タイトル不明」を表示
-      const g = '<li class="lists-item"><div class="list-inner"><p>タイトル：' + (c.title ? c.title : "タイトル不明")
+      let contents = '<li class="lists-item"><div class="list-inner"><p>タイトル：' + (c.title ? c.title : "タイトル不明")+'</p></div>';
       // テキストを追加＋代入された変数の中に作者情報が存在する場合はその内容を、存在しない場合は「作者不明」を表示
-      + "</p><p>作者：" + (c["dc:creator"] ? c["dc:creator"] : "作者不明")
+      contents += '<div class="list-inner"><p>作者：' + (c["dc:creator"] ? c["dc:creator"] : "作者不明")+'</p></div>';
       // テキストを追加＋代入された変数の中に出版者情報が存在する場合はその内容を、存在しない場合は「出版者不明」を表示
-      + "</p><p>出版者：" + (c["dc:publisher"] ? c["dc:publisher"][0] : "出版者不明")
+      contents += '<div class="list-inner"><p>出版者：' + (c["dc:publisher"] ? c["dc:publisher"][0] : "出版者不明")+'</p></div>';
       // 書誌詳細ページのパーマリンクをテキスト押下時にとべるように埋め込み
-      + '</p><a href="' + (c.link["@id"] + '"target="_blank">書籍情報</a></div></li>');
+      contents += '<div class="list-inner"><a href="' + (c.link["@id"] + '"target="_blank">書籍情報</a></div></li>');
     //2.入力した内容で検索結果が見つからなかった時に表示する処理
-    $(".lists").prepend(g)}) : $(".lists").before('<div class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>')
+    $(".lists").append(contents).css(".lists-item")}) :
+    $(".lists").before('<div class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</div>')
   }
   });
 //リセットボタンの機能実装
